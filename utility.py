@@ -2,6 +2,7 @@
 import math
 import os
 
+import execution_context
 import folder_paths as comfy_paths
 import glob
 
@@ -93,11 +94,11 @@ class DVB_ForEachFilename:
         return float("NaN")
 
     @classmethod
-    def INPUT_TYPES(cls):
+    def INPUT_TYPES(cls, exec_context: execution_context.ExecutionContext):
         return {
             "required": {
                 "id": (_ID_SELETIONS,),
-                "directory": ("STRING", {"default": comfy_paths.input_directory}),
+                "directory": ("STRING", {"default": comfy_paths.get_temp_directory(user_hash=exec_context.user_id)}),
                 "pattern": ("STRING", {"default": "*.jpg"})
             },
         }

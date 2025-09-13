@@ -1,8 +1,10 @@
 import os, json
+
+import execution_context
 import folder_paths as comfy_paths
 
 
-TEMP_PATH = os.path.join(os.path.abspath(comfy_paths.temp_directory), "DreamVideoBatches")
+# TEMP_PATH = os.path.join(os.path.abspath(comfy_paths.temp_directory), "DreamVideoBatches")
 
 
 class DRV_StateStore:
@@ -35,7 +37,8 @@ class DRV_StateStore:
 
 
 class DRV_StateFile:
-    def __init__(self, state_collection_name="state"):
+    def __init__(self, exec_context: execution_context.ExecutionContext, state_collection_name="state"):
+        TEMP_PATH = os.path.join(os.path.abspath(comfy_paths.get_temp_directory(user_hash=exec_context.user_hash)), "DreamVideoBatches")
         self._filepath = os.path.join(TEMP_PATH, state_collection_name + ".json")
         self._dirname = os.path.dirname(self._filepath)
         if not os.path.isdir(self._dirname):

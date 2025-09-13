@@ -122,4 +122,4 @@ def update_node_index():
             f.write(json.dumps(node_list, indent=2, sort_keys=True))
 
 
-update_node_index()
+# update_node_index()
